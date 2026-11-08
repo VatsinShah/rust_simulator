@@ -3,6 +3,8 @@
 use macroquad::prelude::DVec2;
 
 use crate::body::Body;
+use crate::body::TAIL_LEN;
+use crate::units::m_2_pixel;
 
 const G: f64 = 6.6743e-11;
 const DT: f64 = 604800.0; // 100hz
@@ -28,6 +30,13 @@ pub fn calculate_net_gravity(bodies: &mut [Body]) {
 
 pub fn euler_forward_integration(bodies: &mut [Body]) {
     for i in 0..bodies.len() {
+        // Update Tail Buffer
+        bodies[i].tail_buffer.push_front(m_2_pixel(bodies[i].pos));
+        if bodies[i].tail_buffer.len() > TAIL_LEN {
+            bodies[i].tail_buffer.pop_back();
+        }
+        
+        // Euler integration
         bodies[i].vel+=bodies[i].acc*DT;
         bodies[i].pos+=bodies[i].vel*DT;
     }
