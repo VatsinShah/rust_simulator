@@ -5,7 +5,7 @@ use std::collections::VecDeque;
 use macroquad::prelude::{Color, DVec2};
 
 pub const TAIL_LEN: usize = 200;
-pub const TAIL_FALLOFF: f32 = 5.0; // λ: higher = faster initial drop
+pub const TAIL_FALLOFF: f32 = 8.0; // λ: higher = faster initial drop
 
 // Rust has no per-field mutability: `let mut body` makes every field mutable.
 // By convention we only modify `pos`, `vel`, `force` and `acc` after creation.
