@@ -6,7 +6,7 @@ use macroquad::prelude::*;
 
 use body::Body;
 use physics::{calculate_net_gravity, euler_forward_integration};
-use units::{AU, m_2_pixel, pixel_2_m, rad_2_pixel};
+use units::{m_2_pixel, pixel_2_m, rad_2_pixel};
 
 #[macroquad::main("Gravity Simulator")]
 async fn main() {
@@ -42,13 +42,8 @@ async fn main() {
         //     acc: DVec2::ZERO,
         // }
     ];
-    
-    // testing gravity call
-    calculate_net_gravity(&mut bodies);
-    for body in &bodies {
-        println!("{} location in au: {} Force in N: {}", body.name, body.pos / AU, body.force);
-    }
 
+    // Sim and viz update loop
     loop {
         clear_background(BLACK);
         
